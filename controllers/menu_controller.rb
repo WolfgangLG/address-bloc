@@ -12,10 +12,11 @@ class MenuController
         # #2
         p "Main Menu - #{address_book.entries.count} entries"
         p "1 - View all entries"
-        p "2 - Create an entry"
-        p "3 - Search for an entry"
-        p "4 - Import entries from a CSV"
-        p "5 - Exit"
+        p "2 – View entry by #"
+        p "3 - Create an entry"
+        p "4 - Search for an entry"
+        p "5 - Import entries from a CSV"
+        p "6 - Exit"
         print "Enter your selection: "
         # #3
         selection = gets.to_i
@@ -28,17 +29,21 @@ class MenuController
             main_menu
             when 2
             system "clear"
-            create_entry
+            view_entry_by_number
             main_menu
             when 3
             system "clear"
-            search_entries
+            create_entry
             main_menu
             when 4
             system "clear"
-            read_csv
+            search_entries
             main_menu
             when 5
+            system "clear"
+            read_csv
+            main_menu
+            when 6
             puts "Good-bye!"
             # #8
             exit(0)
@@ -62,6 +67,22 @@ class MenuController
         
         system "clear"
         puts "End of entries"
+    end
+    
+    def view_entry_by_number
+        p "Choose an Entry #"
+        entry_number = gets.to_i
+        address_book.entries.each_with_index do |entry, index|
+            if (entry_number - 1) == index
+              p "Entry #{entry_number}"
+              p "Name: #{entry.name}".gsub("\n", " ")
+              p "Number: #{entry.phone_number}".gsub("\n", " ")
+              p "Email: #{entry.email}".gsub("\n", " ")
+            else
+              p "Please try again with a valid entry number."
+              view_entry_by_number
+            end
+        end
     end
     
     def create_entry
