@@ -35,7 +35,7 @@ attr_reader :entries
   end
 
   # Search AddressBook for a specific entry by name
- def binary_search(name)
+  def binary_search(name)
    # #1
    lower = 0
    upper = entries.length - 1
@@ -58,6 +58,18 @@ attr_reader :entries
 
    # #5
    return nil
- end
+  end
+
+  def iterative_search(name)
+    index = 0
+    while index < entries.length
+      if name == entries[index].name
+        return entries[index]
+      else
+        index += 1
+      end
+    end
+    return nil
+  end
 
 end
